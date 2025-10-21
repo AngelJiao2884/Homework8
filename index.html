@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    />
+</head>
+
+<body>
+    <!-- Loading Spinner -->
+    <div class="spinner-container" id="spinner">
+        <!-- Multi-ring spinner -->
+        <div class="spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-dots">
+                <div class="spinner-dot"></div>
+                <div class="spinner-dot"></div>
+                <div class="spinner-dot"></div>
+            </div>
+        </div>
+        
+        <!-- Alternative bar spinner (hidden by default) -->
+        <div class="spinner-bars" style="display: none;">
+            <div class="spinner-bar"></div>
+            <div class="spinner-bar"></div>
+            <div class="spinner-bar"></div>
+            <div class="spinner-bar"></div>
+            <div class="spinner-bar"></div>
+        </div>
+        
+        <!-- Progress ring spinner (hidden by default) -->
+        <div class="spinner-progress" style="display: none;">
+            <div class="spinner-progress-ring"></div>
+            <div class="spinner-progress-text">Loading...</div>
+        </div>
+        
+        <!-- Loading text -->
+        <div class="loading-text">Loading Portfolio...</div>
+    </div>
+
+    <!-- Main container using CSS Grid layout -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1 style="font-family: 'Playfair Display', serif;">Angel Jiao Hu</h1>
+                    <h2 style="font-family: 'Poppins', sans-serif;">Computer Science & Business Administration Student</h2>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" data-bs-spy="scroll" data-bs-target="#sidebar">
+            <a href="#summary" class="nav-item"><i class="bi bi-person-circle me-1"></i>Summary</a>
+            <a href="#skills" class="nav-item"><i class="bi bi-gear-fill me-1"></i>Skills</a>
+            <a href="#projects" class="nav-item"><i class="bi bi-folder-fill me-1"></i>Projects</a>
+            <a href="#education" class="nav-item"><i class="bi bi-mortarboard-fill me-1"></i>Education</a>
+            
+            <!-- Style Controls -->
+            <div class="style-controls">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="btn btn-outline-light btn-sm me-1">
+                    <i class="bi bi-moon-fill" id="theme-icon"></i>
+                </button>
+                
+                <!-- Style Customization Toggle -->
+                <button id="style-toggle" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-palette-fill"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Style Customization Panel -->
+        <div id="style-panel" class="style-customization-panel" style="display: none;">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="font-size-slider" class="form-label">Font Size:</label>
+                    <input type="range" class="form-range" id="font-size-slider" min="12" max="20" value="16">
+                    <span id="font-size-value">16px</span>
+                </div>
+                <div class="col-md-4">
+                    <label for="bg-color-picker" class="form-label">Background Color:</label>
+                    <input type="color" class="form-control form-control-color" id="bg-color-picker" value="#ecf0f1">
+                </div>
+                <div class="col-md-4">
+                    <button id="reset-styles" class="btn btn-secondary btn-sm">
+                        <i class="bi bi-arrow-clockwise me-1"></i>Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Floating resume download button -->
+            <a href="CV.pdf" class="resume-btn btn" id="resume-btn-main">
+                <i class="bi bi-download me-2"></i>Download Resume
+                <span class="download-count" id="download-count-main">(0 downloads)</span>
+            </a>
+
+            <!-- Video Introduction -->
+            <section class="section" id="summary">
+                <h3><i class="bi bi-play-circle-fill me-2"></i>Video Introduction</h3>
+                <div class="video-container">
+                    <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/BdMcysX6xeg" 
+                        title="Introduction Video"
+                        frameborder="0" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+
+            <!-- Personalized Greeting Section -->
+            <section class="section">
+                <h3><i class="bi bi-heart-fill me-2"></i>Welcome Message</h3>
+                <div id="personalized-greeting" class="greeting-message">
+                    <!-- This will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="section">
+                <h3><i class="bi bi-person-heart me-2"></i>About Me</h3>
+                <p>
+                    My name is <strong>Angel Jiao Hu</strong>, I am a double major student from <span class="highlight">Spain</span> currently spending a year abroad as an <em>exchange student</em>. I am passionate about <strong>Technology</strong> and <strong>Business</strong> and I try to combine both worlds through <em>entrepreneurship</em>.
+                </p>
+                <p>
+                    <strong>Proactive</strong> and solutions-oriented, with a focus on <u>creativity</u> and initiative to <u>tackle new challenges</u>. Eager to learn, <strong>collaborate</strong> on projects, and <strong>contribute</strong> to the development of disruptive ideas in dynamic, <u>fast-paced environments</u>.
+                </p>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="section" id="skills">
+                <h3><i class="bi bi-gear-fill me-2"></i>Skills</h3>
+                
+                <!-- Add New Skill Form -->
+                <div class="add-skill-form mb-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" id="newSkillInput" class="form-control" placeholder="Enter a new skill..." maxlength="50">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" id="addSkillBtn" class="btn btn-primary w-100">
+                                <i class="bi bi-plus-circle me-2"></i>Add Skill
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-container">
+                    <!-- Computer Science skills category -->
+                    <div class="skill-category">
+                        <h4><i class="bi bi-code-slash me-2"></i>Computer Science</h4>
+                        <div class="skill-items" id="cs-skills">
+                            <span class="skill-item badge">Python</span>
+                            <span class="skill-item badge">SQL</span>
+                            <span class="skill-item badge">C Programming</span>
+                            <span class="skill-item badge">Database Systems</span>
+                        </div>
+                    </div>
+                    <!-- Business skills category -->
+                    <div class="skill-category">
+                        <h4><i class="bi bi-briefcase-fill me-2"></i>Business</h4>
+                        <div class="skill-items" id="business-skills">
+                            <span class="skill-item badge">Leadership</span>
+                            <span class="skill-item badge">Team Management</span>
+                            <span class="skill-item badge">Event Organization</span>
+                            <span class="skill-item badge">Marketing</span>
+                        </div>
+                    </div>
+                    <!-- Language skills category -->
+                    <div class="skill-category">
+                        <h4><i class="bi bi-translate me-2"></i>Languages</h4>
+                        <div class="skill-items" id="language-skills">
+                            <span class="skill-item badge">Spanish (Native)</span>
+                            <span class="skill-item badge">Chinese (Native)</span>
+                            <span class="skill-item badge">English (B2)</span>
+                        </div>
+                    </div>
+                    <!-- New Skills category -->
+                    <div class="skill-category">
+                        <h4><i class="bi bi-plus-circle me-2"></i>New Skills</h4>
+                        <div class="skill-items" id="new-skills">
+                            <!-- New skills will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="section" id="projects">
+                <h3><i class="bi bi-folder-fill me-2"></i>Projects</h3>
+                <div class="projects-grid" id="projects-container">
+                    <!-- Projects will be dynamically generated here -->
+                </div>
+
+                <!-- Additional Project Images with Float Layout -->
+                <div class="additional-projects">
+                    <h3>Project Gallery</h3>
+                    <div class="project-images-float">
+                        <div class="project-image-item" data-caption="Database Design">
+                            <img src="DBMS.jpeg" alt="Database ER Design">
+                        </div>
+                        <div class="project-image-item" data-caption="1942 Gameplay">
+                            <img src="1942_game.webp" alt="1942 Game Screenshot">
+                        </div>
+                        <div class="project-image-item" data-caption="Computer Architecture">
+                            <img src="CS.jpg" alt="Computer Structure">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section with Enhanced Layout -->
+            <section class="section experience-section" id="education">
+                <h3><i class="bi bi-mortarboard-fill me-2"></i>Education & Experience</h3>
+                
+                <!-- Education Table -->
+                <div class="mb-4">
+                    <h4><i class="bi bi-mortarboard me-2"></i>Education</h4>
+                    <div class="table-responsive">
+                        <table class="education-table table table-hover" id="education-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th><i class="bi bi-building me-2"></i>Institution</th>
+                                    <th><i class="bi bi-award me-2"></i>Degree</th>
+                                    <th><i class="bi bi-calendar3 me-2"></i>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody id="education-tbody">
+                                <!-- Education rows will be dynamically generated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Experience Table -->
+                <div>
+                    <h4><i class="bi bi-briefcase me-2"></i>Experience</h4>
+                    <div class="table-responsive">
+                        <table class="education-table table table-hover" id="experience-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th><i class="bi bi-building me-2"></i>Company</th>
+                                    <th><i class="bi bi-award me-2"></i>Position</th>
+                                    <th><i class="bi bi-calendar3 me-2"></i>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody id="experience-tbody">
+                                <!-- Experience rows will be dynamically generated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Floating Resume Button -->
+            <a href="CV.pdf" class="floating-resume-btn btn" id="floating-resume-btn">
+                <i class="bi bi-download me-2"></i>Download Resume
+                <span class="download-count" id="download-count-floating">(0 downloads)</span>
+            </a>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer" id="contact">
+            <div class="contact-info">
+                <a href="mailto:aj2884@nau.edu" class="contact-item btn"><i class="bi bi-envelope-fill me-2"></i>Email me</a>
+                <a href="tel:+1928312998" class="contact-item btn"><i class="bi bi-telephone-fill me-2"></i>Phone</a>
+                <a href="https://www.linkedin.com/in/angel-jiao-hu/" class="contact-item btn" target="_blank"><i class="bi bi-linkedin me-2"></i>LinkedIn</a>
+                <a href="https://github.com/AngelJiao2884" class="contact-item btn" target="_blank"><i class="bi bi-github me-2"></i>GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Spinner Control -->
+     
+    <script>
+        // Spinner control and page load management
+        document.addEventListener('DOMContentLoaded', function() {
+            const spinner = document.getElementById('spinner');
+            const spinnerRings = document.querySelector('.spinner');
+            const spinnerBars = document.querySelector('.spinner-bars');
+            const spinnerProgress = document.querySelector('.spinner-progress');
+            
+            // Random spinner selection for variety
+            const spinnerTypes = ['rings', 'bars', 'progress'];
+            const randomSpinner = spinnerTypes[Math.floor(Math.random() * spinnerTypes.length)];
+            
+            // Show selected spinner type
+            function showSpinnerType(type) {
+                // Hide all spinners
+                spinnerRings.style.display = 'none';
+                spinnerBars.style.display = 'none';
+                spinnerProgress.style.display = 'none';
+                
+                // Show selected spinner
+                switch(type) {
+                    case 'rings':
+                        spinnerRings.style.display = 'block';
+                        break;
+                    case 'bars':
+                        spinnerBars.style.display = 'flex';
+                        break;
+                    case 'progress':
+                        spinnerProgress.style.display = 'block';
+                        break;
+                }
+            }
+            
+            // Show random spinner
+            showSpinnerType(randomSpinner);
+            
+            // Simulate loading time with random duration (1-3 seconds)
+            const loadingTime = Math.random() * 2000 + 1000;
+            
+            // Progress animation for progress ring spinner
+            if (randomSpinner === 'progress') {
+                const progressText = document.querySelector('.spinner-progress-text');
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress > 100) progress = 100;
+                    progressText.textContent = `Loading... ${Math.round(progress)}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                    }
+                }, 100);
+            }
+            
+            // Hide spinner after loading time
+            setTimeout(() => {
+                spinner.classList.add('hidden');
+                
+                // Remove spinner from DOM after transition
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                }, 500);
+            }, loadingTime);
+            
+            // Add click to change spinner type (for demonstration)
+            let currentSpinnerIndex = 0;
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 's' && spinner.style.display !== 'none') {
+                    currentSpinnerIndex = (currentSpinnerIndex + 1) % spinnerTypes.length;
+                    showSpinnerType(spinnerTypes[currentSpinnerIndex]);
+                }
+            });
+            
+            // Add spinner toggle for testing (Ctrl + S)
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 's') {
+                    e.preventDefault();
+                    if (spinner.style.display === 'none') {
+                        spinner.style.display = 'flex';
+                        spinner.classList.remove('hidden');
+                        showSpinnerType(spinnerTypes[currentSpinnerIndex]);
+                    } else {
+                        spinner.classList.add('hidden');
+                        setTimeout(() => {
+                            spinner.style.display = 'none';
+                        }, 500);
+                    }
+                }
+            });
+        });
+        
+        // Page visibility API for better performance
+        document.addEventListener('visibilitychange', function() {
+            const spinner = document.getElementById('spinner');
+            if (document.hidden && spinner.style.display !== 'none') {
+                // Pause animations when page is hidden
+                spinner.style.animationPlayState = 'paused';
+            } else if (!document.hidden && spinner.style.display !== 'none') {
+                // Resume animations when page is visible
+                spinner.style.animationPlayState = 'running';
+            }
+        });
+        
+        // Preload critical resources
+        window.addEventListener('load', function() {
+            // Ensure all images are loaded
+            const images = document.querySelectorAll('img');
+            let loadedImages = 0;
+            
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedImages++;
+                } else {
+                    img.addEventListener('load', () => {
+                        loadedImages++;
+                    });
+                }
+            });
+            
+            // If all images are loaded and spinner is still showing, hide it
+            if (loadedImages === images.length) {
+                const spinner = document.getElementById('spinner');
+                if (spinner && !spinner.classList.contains('hidden')) {
+                    spinner.classList.add('hidden');
+                    setTimeout(() => {
+                        spinner.style.display = 'none';
+                    }, 500);
+                }
+            }
+        });
+    </script>
+
+    <!-- Project Modals -->
+    <!-- Ongoing Project Modal -->
+    <div class="modal fade" id="ongoingModal" tabindex="-1" aria-labelledby="ongoingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="ongoingModalLabel">
+                        <i class="bi bi-clock-fill me-2"></i>Portfolio Website Enhancement
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold">Project Overview:</h6>
+                            <p>This ongoing project involves creating an interactive portfolio website that showcases my skills, projects, and professional experience using modern web technologies.</p>
+                            
+                            <h6 class="fw-bold mt-3">Technical Stack:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i>HTML5 for structure</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i>CSS3 with Flexbox and Grid</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i>JavaScript for interactivity</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i>Bootstrap 5 for responsive design</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold">Project Timeline:</h6>
+                            <div class="timeline-item mb-3">
+                                <strong>Start Date:</strong> September 2025<br>
+                                <strong>Deadline:</strong> December 15, 2025<br>
+                                <strong>Status:</strong> <span class="badge bg-warning text-dark">In Progress</span>
+                            </div>
+                            
+                            <h6 class="fw-bold">Progress:</h6>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% Complete</div>
+                            </div>
+                            
+                            <div id="modal-deadline-info" class="alert alert-info">
+                                <i class="bi bi-calendar-event me-2"></i>
+                                <strong>Days Remaining:</strong> <span id="modal-days-remaining">Calculating...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Database System Modal -->
+    <div class="modal fade" id="dbmsModal" tabindex="-1" aria-labelledby="dbmsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="dbmsModalLabel">
+                        <i class="bi bi-database-fill me-2"></i>Database System Project
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="DBMS.jpeg" class="img-fluid rounded mb-3" alt="Database ER Design">
+                    <h6 class="fw-bold">Technical Details:</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Designed comprehensive ER diagrams</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Implemented normalized database structure</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Created stored procedures for transaction management</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Optimized queries for performance</li>
+                    </ul>
+                    <p class="text-muted">This project demonstrates my understanding of database design principles, normalization techniques, and SQL optimization strategies for real-world banking applications.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Python Game Modal -->
+    <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="gameModalLabel">
+                        <i class="bi bi-controller me-2"></i>Python Videogame Project
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="1942_game.webp" class="img-fluid rounded mb-3" alt="1942 Game Screenshot">
+                    <h6 class="fw-bold">Game Features:</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-joystick text-success me-2"></i>Classic arcade-style gameplay mechanics</li>
+                        <li class="mb-2"><i class="bi bi-palette text-success me-2"></i>Pixel-perfect graphics and animations</li>
+                        <li class="mb-2"><i class="bi bi-music-note text-success me-2"></i>Sound effects and background music</li>
+                        <li class="mb-2"><i class="bi bi-trophy text-success me-2"></i>Progressive difficulty and scoring system</li>
+                    </ul>
+                    <p class="text-muted">Developed using Python and Pygame library, this project showcases my programming skills in game development, object-oriented design, and user interface creation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Computer Structure Modal -->
+    <div class="modal fade" id="csModal" tabindex="-1" aria-labelledby="csModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="csModalLabel">
+                        <i class="bi bi-cpu me-2"></i>Computer Structure Project
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="CS.jpg" class="img-fluid rounded mb-3" alt="Computer Structure">
+                    <h6 class="fw-bold">Technical Components:</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-gear-fill text-info me-2"></i>Assembly language programming</li>
+                        <li class="mb-2"><i class="bi bi-diagram-3 text-info me-2"></i>Binary data manipulation</li>
+                        <li class="mb-2"><i class="bi bi-memory text-info me-2"></i>Memory management concepts</li>
+                        <li class="mb-2"><i class="bi bi-arrows-move text-info me-2"></i>CPU instruction set architecture</li>
+                    </ul>
+                    <p class="text-muted">This low-level programming project deepened my understanding of computer architecture, processor design, and the fundamental operations that power modern computing systems.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+    
+    <!-- Enhanced JavaScript with Scrollspy and Smooth Scrolling -->
+    <script>
+        // Initialize Bootstrap Scrollspy and smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerOffset = 140;
+                        const elementPosition = target.offsetTop;
+                        const offsetPosition = elementPosition - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
